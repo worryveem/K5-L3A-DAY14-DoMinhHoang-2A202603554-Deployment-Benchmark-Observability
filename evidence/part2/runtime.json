@@ -1,0 +1,66 @@
+{
+  "requests": [
+    {
+      "port": 8012,
+      "method": "POST",
+      "path": "/ask?question=Hello",
+      "status": 200,
+      "body": {
+        "answer": "Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé."
+      }
+    },
+    {
+      "port": 8013,
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "uptime_seconds": 70.7,
+        "version": "2.0.0",
+        "timestamp": "2026-11-25T08:22:54.430655"
+      }
+    },
+    {
+      "port": 8013,
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!"
+      }
+    },
+    {
+      "port": 80,
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "uptime_seconds": 119.8,
+        "version": "2.0.0",
+        "timestamp": "2026-11-25T08:22:54.570899"
+      }
+    },
+    {
+      "port": 80,
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!"
+      }
+    }
+  ],
+  "image_sizes": {
+    "my-agent:develop": {
+      "bytes": 1667788048,
+      "MiB": 1590.53
+    },
+    "my-agent:advanced": {
+      "bytes": 239819608,
+      "MiB": 228.71
+    }
+  },
+  "size_reduction_percent": 85.62
+}

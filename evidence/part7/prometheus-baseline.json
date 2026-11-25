@@ -1,0 +1,114 @@
+{
+  "p95_seconds": {
+    "query": "histogram_quantile(0.95,sum by(le)(rate(http_request_duration_seconds_bucket{job=\"agent\",route=\"/ask\"}[1m])))",
+    "response": {
+      "status": "success",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {},
+            "value": [
+              1795595207.88,
+              "0.29186956521739127"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "avg_seconds": {
+    "query": "sum(rate(http_request_duration_seconds_sum{job=\"agent\",route=\"/ask\"}[1m])) / sum(rate(http_request_duration_seconds_count{job=\"agent\",route=\"/ask\"}[1m]))",
+    "response": {
+      "status": "success",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {},
+            "value": [
+              1795595207.886,
+              "0.22496773818732163"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requests_per_instance": {
+    "query": "sum by(instance)(rate(http_requests_total{job=\"agent\",route=\"/ask\"}[1m]))",
+    "response": {
+      "status": "success",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "instance": "172.19.0.9:8000"
+            },
+            "value": [
+              1795595207.888,
+              "9.473760773902608"
+            ]
+          },
+          {
+            "metric": {
+              "instance": "172.19.0.7:8000"
+            },
+            "value": [
+              1795595207.888,
+              "9.455576972033313"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "tokens_per_type": {
+    "query": "sum by(type)(rate(llm_tokens_total{job=\"agent\"}[1m]))",
+    "response": {
+      "status": "success",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "type": "input"
+            },
+            "value": [
+              1795595207.89,
+              "1460.0320034912902"
+            ]
+          },
+          {
+            "metric": {
+              "type": "output"
+            },
+            "value": [
+              1795595207.89,
+              "764.2470087645925"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "error_rate": {
+    "query": "sum(rate(http_requests_total{job=\"agent\",route=\"/ask\",status=~\"5..\"}[1m])) / sum(rate(http_requests_total{job=\"agent\",route=\"/ask\"}[1m]))",
+    "response": {
+      "status": "success",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {},
+            "value": [
+              1795595207.893,
+              "0.007684918347742555"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

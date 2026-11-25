@@ -1,0 +1,33 @@
+{
+  "phase": "baseline",
+  "runs": [
+    {
+      "command": [
+        "python",
+        "eval/run_eval.py",
+        "--url",
+        "http://localhost:8001",
+        "--out",
+        "reports/eval_v1.json"
+      ],
+      "exit_code": 1
+    },
+    {
+      "command": [
+        "python",
+        "eval/run_eval.py",
+        "--url",
+        "http://localhost:8002",
+        "--out",
+        "reports/eval_v2.json",
+        "--baseline",
+        "reports/eval_v1.json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "eval_environment": {
+    "MOCK_ERROR_RATE": "0",
+    "MOCK_SLOW_RATE": "0"
+  }
+}

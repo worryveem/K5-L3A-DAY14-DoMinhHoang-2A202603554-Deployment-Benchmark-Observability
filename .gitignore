@@ -34,3 +34,6 @@ Thumbs.db
 # ── Docker volumes (local dev) ─────────────────────��──────
 data/
 volumes/
+
+# Full transient lab logs stay local; selected trace/log evidence is saved as JSON.
+evidence/**/*.log

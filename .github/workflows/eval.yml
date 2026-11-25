@@ -1,0 +1,43 @@
+name: Agent quality gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 06-lab-complete/benchmark-observability/develop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Evaluate the running agent and reject regressions
+        env:
+          AGENT_VERSION: v2
+          MOCK_ERROR_RATE: "0"
+          MOCK_SLOW_RATE: "0"
+        run: |
+          python app.py > /tmp/day14-agent.log 2>&1 &
+          agent_pid=$!
+          trap 'kill "$agent_pid"; wait "$agent_pid" || true' EXIT
+          python - <<'PY'
+          import time, urllib.request
+          for attempt in range(100):
+              try:
+                  urllib.request.urlopen('http://localhost:8000/health', timeout=1)
+                  break
+              except OSError:
+                  time.sleep(0.1)
+          else:
+              raise SystemExit('Agent did not become healthy')
+          PY
+          python eval/run_eval.py --url http://localhost:8000 --min-accuracy 0.85 --baseline ../../../reports/eval_v2_fixed.json --out reports/ci_eval.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-report
+          path: 06-lab-complete/benchmark-observability/develop/reports/ci_eval.json

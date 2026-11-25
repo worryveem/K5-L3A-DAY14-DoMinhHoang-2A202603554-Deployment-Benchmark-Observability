@@ -1,0 +1,220 @@
+{
+  "executed_at": "2026-11-25T14:45:54.734879+07:00",
+  "execution": "Python Linux container on Docker Desktop WSL2; source mounted read-only; requests made inside the container",
+  "python": "3.11.18",
+  "os_name": "posix",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+  "dependencies": {
+    "fastapi": "0.115.0",
+    "uvicorn": "0.30.0",
+    "python-dotenv": "1.0.1"
+  },
+  "runs": [
+    {
+      "variant": "develop",
+      "cwd": "01-localhost-vs-production/develop",
+      "command": "python app.py",
+      "port": 8000,
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/",
+          "status": 200,
+          "body": {
+            "message": "Hello! Agent is running on my machine :)"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/ask?question=Hello",
+          "status": 200,
+          "body": {
+            "answer": "Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận."
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/ask?question=What%20is%20Docker%3F",
+          "status": 200,
+          "body": {
+            "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/ask",
+          "status": 422,
+          "body": {
+            "detail": [
+              {
+                "type": "missing",
+                "loc": [
+                  "query",
+                  "question"
+                ],
+                "msg": "Field required",
+                "input": null
+              }
+            ]
+          },
+          "request_body": {
+            "question": "Hello"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/health",
+          "status": 404,
+          "body": {
+            "detail": "Not Found"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/ready",
+          "status": 404,
+          "body": {
+            "detail": "Not Found"
+          }
+        }
+      ],
+      "shutdown_signal": "SIGINT",
+      "shutdown_timeout": false,
+      "exit_code": 0,
+      "server_log": [
+        "Starting agent on localhost:8000...",
+        "INFO:     Will watch for changes in these directories: ['/workspace/01-localhost-vs-production/develop']",
+        "INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)",
+        "INFO:     Started reloader process [13] using WatchFiles",
+        "INFO:     Started server process [15]",
+        "INFO:     Waiting for application startup.",
+        "INFO:     Application startup complete.",
+        "INFO:     127.0.0.1:35692 - \"GET / HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:35700 - \"GET / HTTP/1.1\" 200 OK",
+        "[DEBUG] Got question: Hello",
+        "[DEBUG] Using key: [REDACTED_FAKE_KEY]",
+        "[DEBUG] Response: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận.",
+        "INFO:     127.0.0.1:35710 - \"POST /ask?question=Hello HTTP/1.1\" 200 OK",
+        "[DEBUG] Got question: What is Docker?",
+        "[DEBUG] Using key: [REDACTED_FAKE_KEY]",
+        "[DEBUG] Response: Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "INFO:     127.0.0.1:35726 - \"POST /ask?question=What%20is%20Docker%3F HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:35742 - \"POST /ask HTTP/1.1\" 422 Unprocessable Entity",
+        "INFO:     127.0.0.1:35758 - \"GET /health HTTP/1.1\" 404 Not Found",
+        "INFO:     127.0.0.1:35774 - \"GET /ready HTTP/1.1\" 404 Not Found",
+        "INFO:     Shutting down",
+        "INFO:     Waiting for application shutdown.",
+        "INFO:     Application shutdown complete.",
+        "INFO:     Finished server process [15]",
+        "INFO:     Stopping reloader process [13]"
+      ]
+    },
+    {
+      "variant": "production",
+      "cwd": "01-localhost-vs-production/production",
+      "command": "python app.py",
+      "port": 8001,
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/",
+          "status": 200,
+          "body": {
+            "app": "AI Agent",
+            "version": "1.0.0",
+            "environment": "production",
+            "status": "running"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/ask",
+          "status": 200,
+          "body": {
+            "question": "Hello",
+            "answer": "Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ OpenAI/Anthropic.",
+            "model": "gpt-4o-mini"
+          },
+          "request_body": {
+            "question": "Hello"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/ask",
+          "status": 200,
+          "body": {
+            "question": "What is Docker?",
+            "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+            "model": "gpt-4o-mini"
+          },
+          "request_body": {
+            "question": "What is Docker?"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/ask",
+          "status": 422,
+          "body": {
+            "detail": "question field is required"
+          },
+          "request_body": {}
+        },
+        {
+          "method": "GET",
+          "path": "/health",
+          "status": 200,
+          "body": {
+            "status": "ok",
+            "uptime_seconds": 0.5,
+            "version": "1.0.0",
+            "environment": "production",
+            "timestamp": "2026-11-25T07:45:59.080344+00:00"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/ready",
+          "status": 200,
+          "body": {
+            "ready": true
+          }
+        }
+      ],
+      "environment_overrides": {
+        "HOST": "0.0.0.0",
+        "PORT": "8001",
+        "DEBUG": "false",
+        "ENVIRONMENT": "production",
+        "AGENT_API_KEY": "[REDACTED_TEMPORARY_KEY]"
+      },
+      "shutdown_signal": "SIGTERM",
+      "shutdown_timeout": false,
+      "exit_code": 0,
+      "server_log": [
+        "WARNING:root:OPENAI_API_KEY not set — using mock LLM",
+        "INFO:     Started server process [18]",
+        "INFO:     Waiting for application startup.",
+        "INFO:     Application startup complete.",
+        "INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)",
+        "INFO:     127.0.0.1:44872 - \"GET / HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:44882 - \"GET / HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:44892 - \"POST /ask HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:44896 - \"POST /ask HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:44906 - \"POST /ask HTTP/1.1\" 422 Unprocessable Entity",
+        "INFO:     127.0.0.1:44914 - \"GET /health HTTP/1.1\" 200 OK",
+        "INFO:     127.0.0.1:44928 - \"GET /ready HTTP/1.1\" 200 OK",
+        "INFO:     Shutting down",
+        "INFO:     Waiting for application shutdown.",
+        "INFO:     Application shutdown complete.",
+        "INFO:     Finished server process [18]"
+      ],
+      "json_log_validation": {
+        "candidate_lines": 0,
+        "invalid_lines": 0,
+        "invalid_example": null
+      }
+    }
+  ]
+}

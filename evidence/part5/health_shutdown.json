@@ -1,0 +1,50 @@
+{
+  "health": {
+    "status": 200,
+    "headers": {
+      "date": "Wed, 25 Nov 2026 08:37:12 GMT",
+      "server": "uvicorn",
+      "content-length": "185",
+      "content-type": "application/json"
+    },
+    "body": {
+      "status": "ok",
+      "uptime_seconds": 0.3,
+      "version": "1.0.0",
+      "environment": "development",
+      "timestamp": "2026-11-25T08:37:12.932710+00:00",
+      "checks": {
+        "memory": {
+          "status": "ok",
+          "used_percent": 36.2
+        }
+      }
+    }
+  },
+  "ready": {
+    "status": 200,
+    "headers": {
+      "date": "Wed, 25 Nov 2026 08:37:12 GMT",
+      "server": "uvicorn",
+      "content-length": "37",
+      "content-type": "application/json"
+    },
+    "body": {
+      "ready": true,
+      "in_flight_requests": 1
+    }
+  },
+  "in_flight": {
+    "status": 200,
+    "headers": {
+      "date": "Wed, 25 Nov 2026 08:37:12 GMT",
+      "server": "uvicorn",
+      "content-length": "126",
+      "content-type": "application/json"
+    },
+    "body": {
+      "answer": "Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ OpenAI/Anthropic."
+    }
+  },
+  "sigterm_exit_code": -15
+}

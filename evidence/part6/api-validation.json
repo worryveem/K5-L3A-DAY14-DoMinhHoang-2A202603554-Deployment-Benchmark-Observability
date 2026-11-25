@@ -1,0 +1,327 @@
+{
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "environment": "production"
+      },
+      "retry_after": null
+    },
+    {
+      "method": "GET",
+      "path": "/ready",
+      "status": 200,
+      "body": {
+        "ready": true
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 401,
+      "body": {
+        "detail": "Missing or invalid API key"
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "type": "string_too_short",
+            "loc": [
+              "body",
+              "question"
+            ],
+            "msg": "String should have at least 1 character",
+            "input": "",
+            "ctx": {
+              "min_length": 1
+            }
+          }
+        ]
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body",
+              "question"
+            ],
+            "msg": "Value error, question must not be blank",
+            "input": "   ",
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "type": "string_type",
+            "loc": [
+              "body",
+              "question"
+            ],
+            "msg": "Input should be a valid string",
+            "input": 123
+          }
+        ]
+      },
+      "retry_after": null
+    }
+  ],
+  "concurrent_burst": [
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "body": {
+        "question": "Docker",
+        "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.0949999999999998e-05
+        }
+      },
+      "retry_after": null
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 429,
+      "body": {
+        "detail": "Rate limit exceeded"
+      },
+      "retry_after": "60"
+    }
+  ]
+}

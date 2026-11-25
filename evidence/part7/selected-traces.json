@@ -1,0 +1,330 @@
+{
+  "slow": {
+    "traceID": "4cb9c22e0d902c9d630c59c1f31929f1",
+    "spans": [
+      {
+        "traceID": "4cb9c22e0d902c9d630c59c1f31929f1",
+        "spanID": "b0e829715abfaeec",
+        "operationName": "agent.retrieve_context",
+        "startTime": 1795595683364957,
+        "duration": 83487,
+        "tags": [
+          {
+            "key": "retrieval.documents",
+            "value": "1"
+          }
+        ],
+        "error": false,
+        "events": []
+      },
+      {
+        "traceID": "4cb9c22e0d902c9d630c59c1f31929f1",
+        "spanID": "ef9b54203cf1cdd1",
+        "operationName": "chat mock-llm-small",
+        "startTime": 1795595683448485,
+        "duration": 1653034,
+        "tags": [
+          {
+            "key": "gen_ai.operation.name",
+            "value": "chat"
+          },
+          {
+            "key": "gen_ai.provider.name",
+            "value": "mock"
+          },
+          {
+            "key": "gen_ai.request.model",
+            "value": "mock-llm-small"
+          },
+          {
+            "key": "gen_ai.usage.input_tokens",
+            "value": "73"
+          },
+          {
+            "key": "gen_ai.usage.output_tokens",
+            "value": "35"
+          },
+          {
+            "key": "llm.cost_usd",
+            "value": 0.00003195
+          }
+        ],
+        "error": false,
+        "events": []
+      },
+      {
+        "traceID": "4cb9c22e0d902c9d630c59c1f31929f1",
+        "spanID": "0e39fdd6e5c1104d",
+        "operationName": "agent.run",
+        "startTime": 1795595683364929,
+        "duration": 1736714,
+        "tags": [
+          {
+            "key": "agent.question.length",
+            "value": "51"
+          },
+          {
+            "key": "agent.version",
+            "value": "v2"
+          }
+        ],
+        "error": false,
+        "events": []
+      },
+      {
+        "traceID": "4cb9c22e0d902c9d630c59c1f31929f1",
+        "spanID": "c072e44f7a6b1422",
+        "operationName": "POST /ask",
+        "startTime": 1795595683246721,
+        "duration": 1856213,
+        "tags": [
+          {
+            "key": "http.flavor",
+            "value": "1.1"
+          },
+          {
+            "key": "http.host",
+            "value": "172.19.0.6:8000"
+          },
+          {
+            "key": "http.method",
+            "value": "POST"
+          },
+          {
+            "key": "http.route",
+            "value": "/ask"
+          },
+          {
+            "key": "http.scheme",
+            "value": "http"
+          },
+          {
+            "key": "http.server_name",
+            "value": "nginx"
+          },
+          {
+            "key": "http.status_code",
+            "value": "200"
+          },
+          {
+            "key": "http.target",
+            "value": "/ask"
+          },
+          {
+            "key": "http.url",
+            "value": "http://nginx/ask"
+          },
+          {
+            "key": "http.user_agent",
+            "value": "python-requests/2.34.2"
+          },
+          {
+            "key": "net.host.port",
+            "value": "8000"
+          },
+          {
+            "key": "net.peer.ip",
+            "value": "172.19.0.5"
+          },
+          {
+            "key": "net.peer.port",
+            "value": "37040"
+          }
+        ],
+        "error": false,
+        "events": []
+      }
+    ]
+  },
+  "error": {
+    "traceID": "d9bdc9c11bea12e8237cfe38be75d9dc",
+    "spans": [
+      {
+        "traceID": "d9bdc9c11bea12e8237cfe38be75d9dc",
+        "spanID": "a9d5aa77203cb1b2",
+        "operationName": "agent.retrieve_context",
+        "startTime": 1795595681771721,
+        "duration": 22695,
+        "tags": [
+          {
+            "key": "retrieval.documents",
+            "value": "1"
+          }
+        ],
+        "error": false,
+        "events": []
+      },
+      {
+        "traceID": "d9bdc9c11bea12e8237cfe38be75d9dc",
+        "spanID": "14bd7c3097f304a5",
+        "operationName": "chat mock-llm-small",
+        "startTime": 1795595681794587,
+        "duration": 88797,
+        "tags": [
+          {
+            "key": "error.type",
+            "value": "upstream_unavailable"
+          },
+          {
+            "key": "gen_ai.operation.name",
+            "value": "chat"
+          },
+          {
+            "key": "gen_ai.provider.name",
+            "value": "mock"
+          },
+          {
+            "key": "gen_ai.request.model",
+            "value": "mock-llm-small"
+          }
+        ],
+        "error": true,
+        "events": [
+          {
+            "timeUnixNano": "1795595681883331325",
+            "name": "exception",
+            "attributes": [
+              {
+                "key": "exception.escaped",
+                "value": {
+                  "stringValue": "False"
+                }
+              },
+              {
+                "key": "exception.message",
+                "value": {
+                  "stringValue": "Upstream LLM error: 503 Service Unavailable (mock)"
+                }
+              },
+              {
+                "key": "exception.stacktrace",
+                "value": {
+                  "stringValue": "Traceback (most recent call last):\n  File \"/app/app/main.py\", line 153, in run_agent\n    result = await mock_llm.generate(question, context=context,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/utils/mock_llm.py\", line 205, in generate\n    raise LLMError(\"Upstream LLM error: 503 Service Unavailable (mock)\")\nutils.mock_llm.LLMError: Upstream LLM error: 503 Service Unavailable (mock)\n"
+                }
+              },
+              {
+                "key": "exception.type",
+                "value": {
+                  "stringValue": "utils.mock_llm.LLMError"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "traceID": "d9bdc9c11bea12e8237cfe38be75d9dc",
+        "spanID": "104f92ffded2d6ed",
+        "operationName": "agent.run",
+        "startTime": 1795595681771659,
+        "duration": 112248,
+        "tags": [
+          {
+            "key": "agent.question.length",
+            "value": "47"
+          },
+          {
+            "key": "agent.version",
+            "value": "v2"
+          }
+        ],
+        "error": true,
+        "events": [
+          {
+            "timeUnixNano": "1795595681883892730",
+            "name": "exception",
+            "attributes": [
+              {
+                "key": "exception.escaped",
+                "value": {
+                  "stringValue": "False"
+                }
+              },
+              {
+                "key": "exception.message",
+                "value": {
+                  "stringValue": "Upstream LLM error: 503 Service Unavailable (mock)"
+                }
+              },
+              {
+                "key": "exception.stacktrace",
+                "value": {
+                  "stringValue": "Traceback (most recent call last):\n  File \"/home/agent/.local/lib/python3.11/site-packages/opentelemetry/trace/__init__.py\", line 602, in use_span\n    yield span\n  File \"/home/agent/.local/lib/python3.11/site-packages/opentelemetry/sdk/trace/__init__.py\", line 1136, in start_as_current_span\n    yield span\n  File \"/home/agent/.local/lib/python3.11/site-packages/opentelemetry/trace/__init__.py\", line 441, in start_as_current_span\n    yield span\n  File \"/app/app/main.py\", line 153, in run_agent\n    result = await mock_llm.generate(question, context=context,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/utils/mock_llm.py\", line 205, in generate\n    raise LLMError(\"Upstream LLM error: 503 Service Unavailable (mock)\")\nutils.mock_llm.LLMError: Upstream LLM error: 503 Service Unavailable (mock)\n"
+                }
+              },
+              {
+                "key": "exception.type",
+                "value": {
+                  "stringValue": "utils.mock_llm.LLMError"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "traceID": "d9bdc9c11bea12e8237cfe38be75d9dc",
+        "spanID": "a88a3534f4c82b6d",
+        "operationName": "POST /ask",
+        "startTime": 1795595681769429,
+        "duration": 116115,
+        "tags": [
+          {
+            "key": "http.flavor",
+            "value": "1.1"
+          },
+          {
+            "key": "http.host",
+            "value": "172.19.0.6:8000"
+          },
+          {
+            "key": "http.method",
+            "value": "POST"
+          },
+          {
+            "key": "http.route",
+            "value": "/ask"
+          },
+          {
+            "key": "http.scheme",
+            "value": "http"
+          },
+          {
+            "key": "http.server_name",
+            "value": "nginx"
+          },
+          {
+            "key": "http.status_code",
+            "value": "503"
+          },
+          {
+            "key": "http.target",
+            "value": "/ask"
+          },
+          {
+            "key": "http.url",
+            "value": "http://nginx/ask"
+          },
+          {
+            "key": "http.user_agent",
+            "value": "python-requests/2.34.2"
+          },
+          {
+            "key": "net.host.port",
+            "value": "8000"
+          },
+          {
+            "key": "net.peer.ip",
+            "value": "172.19.0.5"
+          },
+          {
+            "key": "net.peer.port",
+            "value": "38194"
+          }
+        ],
+        "error": true,
+        "events": []
+      }
+    ]
+  }
+}

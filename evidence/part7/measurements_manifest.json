@@ -1,0 +1,133 @@
+{
+  "phase": "measurements",
+  "runs": [
+    {
+      "command": [
+        "python",
+        "eval/run_eval.py",
+        "--url",
+        "http://localhost:8002",
+        "--min-accuracy",
+        "1.0",
+        "--baseline",
+        "reports/eval_v2.json",
+        "--out",
+        "reports/eval_v2_fixed.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "1",
+        "--out",
+        "reports/load_v2_c1.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "10",
+        "--out",
+        "reports/load_v2_c10.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "50",
+        "--out",
+        "reports/load_v2_c50.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "100",
+        "--out",
+        "reports/load_v2_c100.json"
+      ],
+      "exit_code": 1
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "20",
+        "--out",
+        "reports/load_v2_slow_0.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "20",
+        "--out",
+        "reports/load_v2_slow_0.03.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "20",
+        "--out",
+        "reports/load_v2_slow_0.1.json"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "load_environment": {
+    "MOCK_ERROR_RATE": "0.01",
+    "MOCK_SLOW_RATE": "0.03 unless overridden"
+  },
+  "eval_environment": {
+    "MOCK_ERROR_RATE": "0",
+    "MOCK_SLOW_RATE": "0"
+  }
+}

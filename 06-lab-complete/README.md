@@ -1,5 +1,9 @@
 # Part 6 — Final Project: Production-ready AI Agent
 
+> **Bản bài làm đã hoàn thiện:** chạy kiểm tra đầy đủ đạt **PASS 12/12, 43/43 checks**; xem [output](../evidence/part6/readiness.txt). Các đoạn giới thiệu bản khung bên dưới là đề gốc để đối chiếu.
+>
+> Để chạy: `cp .env.example .env`, tạo `AGENT_API_KEY` riêng trong `.env` (không commit), rồi `docker compose -p k5-day14-final up -d --build`. API nhận JSON tại `POST /ask`, header `X-API-Key`; `/health` và `/ready` công khai. Xem [Deployment](../DEPLOYMENT.md) và [Benchmark Report](../BENCHMARK_REPORT.md).
+
 Bạn tự xây một AI agent đủ chuẩn production từ **bản khung** trong thư mục này, kết hợp mọi thứ đã học ở Part 1–5.
 Mọi file đều đã có sẵn, phần việc của bạn nằm ở các chỗ ghi `TODO`. Bản khung chạy được nhưng **chưa đạt tiêu chí nào**.
 

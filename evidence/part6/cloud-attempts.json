@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-25",
+  "railway": {
+    "authenticated": true,
+    "operation": "railway init --name k5-day14-deployment-lab",
+    "result": "blocked",
+    "message": "Your trial has expired. Please select a plan to continue using Railway.",
+    "resources_created": false
+  },
+  "render": {
+    "authenticated": true,
+    "operation": "render keyvalues create --name day14-redis --plan free --region singapore",
+    "result": "blocked",
+    "status": 402,
+    "message": "Payment information is required to complete this request. To add a card, visit https://dashboard.render.com/billing",
+    "resources_created": false
+  }
+}
