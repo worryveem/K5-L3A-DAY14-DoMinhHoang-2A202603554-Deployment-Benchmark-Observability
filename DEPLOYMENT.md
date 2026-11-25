@@ -1,61 +1,57 @@
 # Deployment Information — Day 14
 
-## Trạng thái
+## Public URL
 
-**Tạm bỏ deploy cloud theo yêu cầu của người học.** Toàn bộ checkpoint local đã có bằng chứng; CP6 chưa hoàn tất.
-Chưa có public URL đã kiểm chứng, chưa có ba ảnh cloud `dashboard.png`, `running.png`, `test.png`.
-Không dùng localhost hoặc ảnh local thay cho bằng chứng cloud.
+[Agent trên Railway](https://day14-agent-production-a76b55eb.up.railway.app) · [Swagger API](https://day14-agent-production-a76b55eb.up.railway.app/docs)
 
-## Nền tảng đã kiểm tra
+**Hoàn tất CP6:** agent Part 6 và Redis đã deploy thành công bằng tài khoản Railway mới.
+Bốn kiểm tra public được chạy ngày 25/11/2026 lúc 16:33 (GMT+7), kết quả **200 / 200 / 401 / 200**.
 
-| Nền tảng | Kết quả thực tế ngày 25/11/2026 |
-|---|---|
-| Railway | Đăng nhập CLI thành công. Tạo project bị từ chối: `Your trial has expired. Please select a plan to continue using Railway.` |
-| Render (được chọn thay thế) | Đăng nhập CLI thành công. Validate Blueprint trả `need_payment_info`; tạo Redis với `--plan free` trả HTTP 402: `Payment information is required to complete this request.` |
+## Platform và cấu hình thực tế
 
-Không tạo gói trả phí, không nhập thông tin thanh toán. Chủ tài khoản cần tự hoàn thành billing hoặc trao đổi Lab Coach theo RULES.md.
-Không có service cloud nào được tạo thành công trong hai lần thử này.
+- Platform: Railway, environment production, project `k5-day14-agent-lab`.
+- [Project Railway](https://railway.com/project/2b15432f-a698-4d06-ac54-783627508e3e) (cần tài khoản có quyền truy cập).
+- Service `day14-agent`: SUCCESS, deployment `da360dea-a687-457f-a340-1775ef43eb40`, một replica, hai Uvicorn worker.
+- Service `Redis`: SUCCESS, Redis 8.2, một replica, volume `/data` 500 MB.
+- Agent kết nối `redis.railway.internal:6379`, có authentication; không ghi URL chứa mật khẩu vào tài liệu.
+- Source upload từ `06-lab-complete/`; builder DOCKERFILE, healthcheckPath `/health`, port 8000.
+- Deploy bằng `railway up . --path-as-root --service day14-agent --detach`; chưa cấu hình GitHub autodeploy.
+- App mock LLM, không sử dụng API key LLM thật.
 
-## Cấu hình sẵn sàng
+Dữ liệu trực tiếp từ Railway: [railway-deployment.json](evidence/part6/railway-deployment.json).
+Kiểm tra local đầy đủ trước deploy: [PASS 12/12, 43/43 checks](evidence/part6/readiness.txt).
 
-- Source: `06-lab-complete/`; Dockerfile multi-stage, non-root, dùng PORT của nền tảng.
-- Render Blueprint: `06-lab-complete/render.yaml`, web + Key Value cùng region Singapore, đều khai báo plan free.
-- API key dùng generateValue hoặc env, không ghi key thật trong repo.
-- Redis chỉ truy cập nội bộ; REDIS_URL lấy connectionString của backing service.
-- Railway config dự phòng: `06-lab-complete/railway.toml`.
-- Kiểm tra local đầy đủ: [PASS 12/12](evidence/part6/readiness.txt).
-- Kiểm tra HTTP/validation/concurrency Compose: [api-validation.json](evidence/part6/api-validation.json).
+## Kết quả kiểm tra public
 
-## Biến môi trường trên cloud
+| Request | API key | HTTP thực tế |
+|---|---|---:|
+| GET /health | Không cần | 200 |
+| GET /ready | Không cần | 200 |
+| POST /ask | Thiếu | 401 |
+| POST /ask | Đúng | 200 |
 
-| Biến | Cách đặt |
+[Request/response thực tế](evidence/part6/public-api.json); `ready=true` xác nhận agent kết nối được Redis.
+Request có key trả câu trả lời mock: “Deployment là quá trình đưa code từ máy bạn lên server để người khác dùng được.”
+
+## Environment variables đã đặt trên Railway
+
+| Biến | Cách đặt / giá trị không nhạy cảm |
 |---|---|
 | ENVIRONMENT | production |
-| PORT | Do nền tảng cấp; Docker CMD đọc biến này |
-| AGENT_API_KEY | Secret ngẫu nhiên, lưu ở platform; không ghi giá trị vào tài liệu |
-| REDIS_URL | Connection string nội bộ của Redis/Key Value |
+| PORT | 8000; Docker CMD đọc PORT |
+| AGENT_API_KEY | Key ngẫu nhiên; đặt qua Railway CLI stdin, giá trị được che |
+| REDIS_URL | Tham chiếu `${{Redis.REDIS_URL}}` đến service Redis |
 | RATE_LIMIT_PER_MINUTE | 10 |
 | DAILY_BUDGET_USD | 1 |
 | MONTHLY_BUDGET_USD | 10 |
 | LOG_LEVEL | INFO |
 
-Đây là giá trị cấu hình dự kiến; chưa khẳng định đã đặt lên service cloud khi chưa tạo được service.
-Redis free không bảo đảm persistence qua restart datastore; state vẫn dùng chung và còn sau restart agent.
-Giới hạn thực hành này khác Redis AOF trong Compose local.
+Thông tin gọi API được lưu riêng trên máy trong `06-lab-complete/.env.production` (đã ignore, không commit).
+Không ghi API key, password Redis hoặc token đăng nhập vào báo cáo/ảnh/Git.
 
-## Tiếp tục deploy Render khi tài khoản sẵn sàng
+## Lệnh tự kiểm tra
 
-1. Push bản bài làm lên fork GitHub.
-2. Trong Render tạo Blueprint từ repo, chọn đường dẫn `06-lab-complete/render.yaml`.
-3. Kiểm tra web service và Key Value đều plan free, region Singapore; không nâng plan tự động.
-4. Deploy, chờ `/ready` thực sự trả 200 (không chỉ nhìn healthcheck nền tảng).
-5. Chạy bốn lệnh bên dưới; lưu mã HTTP và ba ảnh cloud, rồi cập nhật trạng thái file này.
-
-Tham khảo [Render CLI](https://render.com/docs/cli), [Blueprint spec](https://render.com/docs/blueprint-spec).
-
-## Bốn kiểm tra public bắt buộc
-
-Các lệnh này là quy trình sau deploy, **chưa phải output cloud đã chạy**. Đặt BASE bằng URL service và AGENT_API_KEY bằng secret trong shell riêng.
+Trong Bash, đặt `BASE` thành URL public và `AGENT_API_KEY` thành secret của service trong shell riêng:
 
 ```bash
 curl -sS -o /dev/null -w '%{http_code}\n' "$BASE/health"  # 200
@@ -67,10 +63,20 @@ curl -sS -o /dev/null -w '%{http_code}\n' -X POST "$BASE/ask" \
   -d '{"question":"Hello"}'  # 200
 ```
 
-## Ảnh cần bổ sung sau deploy
+Script kiểm tra và lưu bằng chứng: `python scripts/verify_public_deployment.py --url "$BASE"`.
+Script đọc key qua environment và không ghi credential vào output.
 
-- `screenshots/dashboard.png`: dashboard nền tảng và trạng thái deploy.
-- `screenshots/running.png`: service cloud đang chạy.
-- `screenshots/test.png`: bốn kết quả HTTP, không hiển thị key/token.
+## Screenshots
 
-Bốn ảnh observability thực tế đã có trong `screenshots/`; không thay thế ba ảnh cloud còn thiếu.
+- [Trạng thái deploy](screenshots/dashboard.png): bản xuất trạng thái Railway CLI từ JSON thật; không phải ảnh giao diện web Railway đã đăng nhập.
+- [Service đang chạy](screenshots/running.png): Swagger UI tải trực tiếp từ URL public.
+- [Kết quả test](screenshots/test.png): bản xuất bốn response HTTP thật, đã che key.
+
+Công cụ browser/native host không kết nối được, nên ảnh trạng thái và test được render bằng Chromium từ bằng chứng CLI/HTTP,
+được ghi nguồn rõ ràng; không dựng lại giao diện Railway hoặc tự tạo số liệu.
+
+## Lịch sử xử lý tài khoản
+
+Các lần thử bằng tài khoản trước bị giới hạn Railway trial và Render billing, xem [cloud-attempts.json](evidence/part6/cloud-attempts.json).
+Sau khi người học đăng nhập tài khoản Railway khác, project/Redis/agent đã tạo và deploy thành công.
+Không thực hiện nâng gói trả phí hoặc nhập thông tin thanh toán trong quá trình này.

@@ -36,4 +36,17 @@ for kind in ['slow', 'error']:
     assert any(log['trace_id'] == selected[kind]['traceID'] for log in logs[kind])
 readiness = (root / 'evidence/part6/readiness.txt').read_text(encoding='utf-8')
 assert 'PASS 12/12' in readiness and '43/43 checks passed' in readiness
-print('Local submission evidence is consistent. Cloud completion must be verified separately in DEPLOYMENT.md.')
+public_path = root / 'evidence/part6/public-api.json'
+if public_path.exists():
+    public = json.loads(public_path.read_text(encoding='utf-8'))
+    assert public['passed'] and [check['status'] for check in public['checks']] == [200, 200, 401, 200]
+    assert public['public_url'].startswith('https://')
+    deployment = json.loads((root / 'evidence/part6/railway-deployment.json').read_text(encoding='utf-8'))
+    assert deployment['public_url'] == public['public_url']
+    assert all(service['status'] == 'SUCCESS' for service in deployment['services'])
+    assert deployment['redis_connection']['host'].endswith('.railway.internal')
+    for name in ['dashboard.png', 'running.png', 'test.png']:
+        assert (root / 'screenshots' / name).is_file(), name
+    print('Local and cloud submission evidence is consistent; all seven screenshots are present.')
+else:
+    print('Local submission evidence is consistent. Cloud completion must be verified separately in DEPLOYMENT.md.')

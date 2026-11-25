@@ -1,7 +1,7 @@
 # Day 14 — Deployment, Benchmark & Observability
 
 > **Bài làm:** [Mission Answers](MISSION_ANSWERS.md) · [Benchmark Report](BENCHMARK_REPORT.md) · [Deployment](DEPLOYMENT.md).
-> Part 6 đã đạt PASS 12/12 (43/43 checks), eval sau sửa đạt 23/23; bằng chứng nằm trong `evidence/`, `reports/`, `benchmark-results/`, `screenshots/`. Deploy cloud đang tạm bỏ theo yêu cầu người học, xem `DEPLOYMENT.md`.
+> Part 6 đã đạt PASS 12/12 (43/43 checks), eval sau sửa đạt 23/23; bằng chứng nằm trong `evidence/`, `reports/`, `benchmark-results/`, `screenshots/`. Agent đã deploy lên [Railway](https://day14-agent-production-a76b55eb.up.railway.app/docs), xem `DEPLOYMENT.md` để biết kết quả kiểm tra public.
 
 > Đưa agent lên cloud, đo xem nó nhanh và đúng tới đâu, rồi giám sát nó khi chạy thật.
 

@@ -1,0 +1,67 @@
+{
+    "captured_at":  "2026-11-25T16:34:40.3813114+07:00",
+    "platform":  "Railway",
+    "project_id":  "2b15432f-a698-4d06-ac54-783627508e3e",
+    "project_name":  "k5-day14-agent-lab",
+    "environment_id":  "80ed9d52-163a-4c4a-854d-a3f68bf55a30",
+    "environment":  "production",
+    "dashboard_url":  "https://railway.com/project/2b15432f-a698-4d06-ac54-783627508e3e",
+    "public_url":  "https://day14-agent-production-a76b55eb.up.railway.app",
+    "source_directory":  "06-lab-complete",
+    "services":  [
+                     {
+                         "id":  "1f1d7bdc-db4e-46dc-808f-3e39cdbd645c",
+                         "name":  "day14-agent",
+                         "status":  "SUCCESS",
+                         "deployment_id":  "da360dea-a687-457f-a340-1775ef43eb40",
+                         "replicas":  {
+                                          "configured":  1,
+                                          "running":  1,
+                                          "crashed":  0,
+                                          "exited":  0,
+                                          "total":  1
+                                      },
+                         "volumes":  [
+
+                                     ]
+                     },
+                     {
+                         "id":  "d59132e2-5d0e-425d-9d66-6cb6484d7d61",
+                         "name":  "Redis",
+                         "status":  "SUCCESS",
+                         "deployment_id":  "720ce804-2042-49b9-9870-40de60c994d3",
+                         "replicas":  {
+                                          "configured":  1,
+                                          "running":  1,
+                                          "crashed":  0,
+                                          "exited":  0,
+                                          "total":  1
+                                      },
+                         "volumes":  [
+                                         {
+                                             "name":  "redis-volume",
+                                             "mountPath":  "/data",
+                                             "currentSizeMb":  0.0,
+                                             "sizeMb":  500,
+                                             "state":  "READY"
+                                         }
+                                     ]
+                     }
+                 ],
+    "environment_variable_names":  [
+                                       "AGENT_API_KEY",
+                                       "REDIS_URL",
+                                       "PORT",
+                                       "ENVIRONMENT",
+                                       "RATE_LIMIT_PER_MINUTE",
+                                       "DAILY_BUDGET_USD",
+                                       "MONTHLY_BUDGET_USD",
+                                       "LOG_LEVEL"
+                                   ],
+    "redis_connection":  {
+                             "scheme":  "redis",
+                             "host":  "redis.railway.internal",
+                             "port":  6379,
+                             "credentials_present":  true
+                         }
+}

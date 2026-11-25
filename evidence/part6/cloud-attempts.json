@@ -1,18 +1,32 @@
 {
-  "date": "2026-11-25",
-  "railway": {
-    "authenticated": true,
-    "operation": "railway init --name k5-day14-deployment-lab",
-    "result": "blocked",
-    "message": "Your trial has expired. Please select a plan to continue using Railway.",
-    "resources_created": false
-  },
-  "render": {
-    "authenticated": true,
-    "operation": "render keyvalues create --name day14-redis --plan free --region singapore",
-    "result": "blocked",
-    "status": 402,
-    "message": "Payment information is required to complete this request. To add a card, visit https://dashboard.render.com/billing",
-    "resources_created": false
-  }
+    "date":  "2026-11-25",
+    "railway":  {
+                    "authenticated":  true,
+                    "operation":  "railway init --name k5-day14-deployment-lab",
+                    "result":  "blocked",
+                    "message":  "Your trial has expired. Please select a plan to continue using Railway.",
+                    "resources_created":  false
+                },
+    "render":  {
+                   "authenticated":  true,
+                   "operation":  "render keyvalues create --name day14-redis --plan free --region singapore",
+                   "result":  "blocked",
+                   "status":  402,
+                   "message":  "Payment information is required to complete this request. To add a card, visit https://dashboard.render.com/billing",
+                   "resources_created":  false
+               },
+    "successful_railway_retry":  {
+                                     "date":  "2026-11-25",
+                                     "account":  "new account authorized by the user",
+                                     "resources_created":  true,
+                                     "project_id":  "2b15432f-a698-4d06-ac54-783627508e3e",
+                                     "public_url":  "https://day14-agent-production-a76b55eb.up.railway.app",
+                                     "status":  "SUCCESS",
+                                     "public_checks":  [
+                                                           200,
+                                                           200,
+                                                           401,
+                                                           200
+                                                       ]
+                                 }
 }

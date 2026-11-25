@@ -1,0 +1,31 @@
+{"timestamp":"2026-11-25T09:32:40.140202591Z","level":"info","message":"Starting Container"}
+{"level":"error","timestamp":"2026-11-25T09:32:40.281455011Z","message":"INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)"}
+{"timestamp":"2026-11-25T09:32:40.281461221Z","message":"INFO:     Started parent process [1]","level":"error"}
+{"message":"INFO:     Started server process [3]","timestamp":"2026-11-25T09:32:40.714465044Z","level":"error"}
+{"level":"error","timestamp":"2026-11-25T09:32:40.714469404Z","message":"INFO:     Waiting for application startup."}
+{"event":"startup","level":"info","timestamp":"2026-11-25T09:32:40.714473294Z","ts":"2026-11-25T09:32:40.708953+00:00","environment":"production","message":""}
+{"message":"INFO:     Application startup complete.","timestamp":"2026-11-25T09:32:40.714476494Z","level":"error"}
+{"message":"INFO:     Application startup complete.","timestamp":"2026-11-25T09:32:40.734210399Z","level":"error"}
+{"level":"error","timestamp":"2026-11-25T09:32:40.734237939Z","message":"INFO:     Started server process [4]"}
+{"timestamp":"2026-11-25T09:32:40.734240069Z","message":"INFO:     Waiting for application startup.","level":"error"}
+{"event":"startup","message":"","level":"info","timestamp":"2026-11-25T09:32:40.734242419Z","ts":"2026-11-25T09:32:40.731701+00:00","environment":"production"}
+{"status":200,"ts":"2026-11-25T09:33:29.984832+00:00","request_id":"a8cd6f60005541d6b847175efb6092ce","event":"http_request","ms":12.98,"method":"GET","timestamp":"2026-11-25T09:33:30.755010909Z","path":"/ready","level":"info","message":""}
+{"message":"INFO:     100.64.0.1:61482 - \"GET /ready HTTP/1.1\" 200 OK","level":"info","timestamp":"2026-11-25T09:33:30.755019729Z"}
+{"ts":"2026-11-25T09:33:30.496406+00:00","event":"http_request","path":"/health","method":"GET","request_id":"e3e56e6d9d1145929cf7ecfe0a33c7c2","timestamp":"2026-11-25T09:33:30.755023979Z","message":"","status":200,"ms":1.53,"level":"info"}
+{"message":"INFO:     100.64.0.2:20224 - \"GET /health HTTP/1.1\" 200 OK","timestamp":"2026-11-25T09:33:30.755029079Z","level":"info"}
+{"timestamp":"2026-11-25T09:33:31.047016030Z","event":"http_request","level":"info","request_id":"de2c6d29c9064d1181172e3a19e4770e","message":"","ts":"2026-11-25T09:33:30.985471+00:00","path":"/ready","status":200,"ms":9.55,"method":"GET"}
+{"level":"info","message":"INFO:     100.64.0.3:19388 - \"GET /ready HTTP/1.1\" 200 OK","timestamp":"2026-11-25T09:33:31.047019270Z"}
+{"timestamp":"2026-11-25T09:33:31.434733073Z","request_id":"bab9a82e8cf7406797f91bc63c61ff28","path":"/ask","ms":1.04,"level":"info","method":"POST","ts":"2026-11-25T09:33:31.404588+00:00","status":401,"message":"","event":"http_request"}
+{"timestamp":"2026-11-25T09:33:31.434737613Z","level":"info","message":"INFO:     100.64.0.4:34246 - \"POST /ask HTTP/1.1\" 401 Unauthorized"}
+{"timestamp":"2026-11-25T09:33:31.968820572Z","level":"info","path":"/ask","method":"POST","message":"","event":"http_request","ts":"2026-11-25T09:33:31.944583+00:00","request_id":"4214d23f2d7a443ea5dbb9a4a266ab97","status":200,"ms":114.05}
+{"message":"INFO:     100.64.0.5:37376 - \"POST /ask HTTP/1.1\" 200 OK","timestamp":"2026-11-25T09:33:31.968823122Z","level":"info"}
+{"method":"GET","level":"info","message":"","timestamp":"2026-11-25T09:34:22.148651011Z","ts":"2026-11-25T09:34:16.026005+00:00","status":404,"request_id":"4dc0ebf5cee54503a72968033fe289a8","path":"/favicon.ico","ms":0.38,"event":"http_request"}
+{"level":"info","message":"INFO:     100.64.0.8:60008 - \"GET /favicon.ico HTTP/1.1\" 404 Not Found","timestamp":"2026-11-25T09:34:22.148657791Z"}
+{"path":"/","method":"GET","status":404,"ms":0.4,"request_id":"91973c0083ce455cbe281f322e1ba483","message":"","level":"info","timestamp":"2026-11-25T09:34:22.148690441Z","ts":"2026-11-25T09:34:14.824347+00:00","event":"http_request"}
+{"message":"INFO:     100.64.0.6:54466 - \"GET / HTTP/1.1\" 404 Not Found","level":"info","timestamp":"2026-11-25T09:34:22.148712581Z"}
+{"event":"http_request","status":404,"ms":0.3,"ts":"2026-11-25T09:34:15.459838+00:00","request_id":"3f5caa34267f41f799ed99eb733f2339","message":"","timestamp":"2026-11-25T09:34:22.148725190Z","path":"/","level":"info","method":"GET"}
+{"level":"info","message":"INFO:     100.64.0.7:22162 - \"GET / HTTP/1.1\" 404 Not Found","timestamp":"2026-11-25T09:34:22.148733000Z"}
+{"timestamp":"2026-11-25T09:34:24.813200527Z","message":"","event":"http_request","level":"info","ms":0.37,"status":404,"ts":"2026-11-25T09:34:24.799701+00:00","method":"GET","request_id":"3c1d31b067b749b7b302917d86563bc4","path":"/"}
+{"message":"INFO:     100.64.0.9:27328 - \"GET / HTTP/1.1\" 404 Not Found","timestamp":"2026-11-25T09:34:24.813213997Z","level":"info"}
+{"ts":"2026-11-25T09:34:25.221535+00:00","path":"/favicon.ico","message":"","event":"http_request","timestamp":"2026-11-25T09:34:25.222779429Z","method":"GET","request_id":"ce0ae4372af3493dac52e40bdd1fac01","status":404,"ms":0.35,"level":"info"}
+{"level":"info","timestamp":"2026-11-25T09:34:25.222784239Z","message":"INFO:     100.64.0.10:11626 - \"GET /favicon.ico HTTP/1.1\" 404 Not Found"}

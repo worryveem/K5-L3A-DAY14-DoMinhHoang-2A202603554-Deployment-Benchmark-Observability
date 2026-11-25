@@ -1,0 +1,55 @@
+{
+  "executed_at": "2026-11-25T16:33:30.953266+07:00",
+  "public_url": "https://day14-agent-production-a76b55eb.up.railway.app",
+  "expected_statuses": [
+    200,
+    200,
+    401,
+    200
+  ],
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "authenticated": false,
+      "body": {
+        "status": "ok",
+        "environment": "production"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ready",
+      "status": 200,
+      "authenticated": false,
+      "body": {
+        "ready": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 401,
+      "authenticated": false,
+      "body": {
+        "detail": "Missing or invalid API key"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "authenticated": true,
+      "body": {
+        "question": "What is deployment?",
+        "answer": "Deployment là quá trình đưa code từ máy bạn lên server để người khác dùng được.",
+        "usage": {
+          "estimated": true,
+          "cost_usd": 1.1999999999999999e-05
+        }
+      }
+    }
+  ],
+  "passed": true
+}

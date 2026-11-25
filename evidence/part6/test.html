@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Public deployment — actual HTTP verification</title>
+  <style>body{font:17px/1.6 system-ui;margin:48px;color:#172334;background:#f5f7fa}
+  main{max-width:1320px;margin:auto;background:white;padding:32px;border:1px solid #d5dce5}
+  h1{font-size:28px;margin:0 0 12px}p{color:#49576b}pre{white-space:pre-wrap;overflow-wrap:anywhere;
+  font:16px/1.5 Consolas,monospace;padding:24px;background:#edf2f7;border:1px solid #d5dce5}</style>
+  <main><h1>Public deployment — actual HTTP verification</h1><p>Source: live public requests saved in public-api.json. All four required checks passed.</p><pre>Public URL: https://day14-agent-production-a76b55eb.up.railway.app
+Executed: 2026-11-25T16:33:30.953266+07:00
+
+GET /health | API key: absent | HTTP 200
+{
+  &quot;status&quot;: &quot;ok&quot;,
+  &quot;environment&quot;: &quot;production&quot;
+}
+
+GET /ready | API key: absent | HTTP 200
+{
+  &quot;ready&quot;: true
+}
+
+POST /ask | API key: absent | HTTP 401
+{
+  &quot;detail&quot;: &quot;Missing or invalid API key&quot;
+}
+
+POST /ask | API key: [REDACTED] | HTTP 200
+{
+  &quot;question&quot;: &quot;What is deployment?&quot;,
+  &quot;answer&quot;: &quot;Deployment là quá trình đưa code từ máy bạn lên server để người khác dùng được.&quot;,
+  &quot;usage&quot;: {
+    &quot;estimated&quot;: true,
+    &quot;cost_usd&quot;: 0.000011999999999999999
+  }
+}
+</pre></main></html>

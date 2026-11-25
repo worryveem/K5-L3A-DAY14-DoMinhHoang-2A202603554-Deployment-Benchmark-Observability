@@ -11,7 +11,7 @@ Các kết quả dưới đây do công cụ thực thi thu thập thật; khôn
 | CP3 — Security | Hoàn tất |
 | CP4 — Scaling/reliability | Hoàn tất |
 | CP5 — Part 6 | PASS 12/12, 43/43 checks |
-| CP6 — Cloud | Tạm bỏ theo yêu cầu người học; chưa có public URL |
+| CP6 — Cloud | Hoàn tất Railway + Redis, public HTTP 200/200/401/200 |
 | CP7 — Benchmark local | Hoàn tất, eval cuối 23/23 |
 | CP8 — Observability và hồ sơ local | Hoàn tất số đo/ảnh/báo cáo; chưa nộp link lên LMS |
 
@@ -146,10 +146,10 @@ Healthcheck đánh dấu container unhealthy; Docker restart policy không tự 
 
 ## Part 3 — Cloud Deployment (CP6)
 
-Trạng thái deploy được ghi riêng trong [DEPLOYMENT.md](DEPLOYMENT.md), không lấy URL local thay URL cloud.
-Railway đã đăng nhập nhưng từ chối tạo project: `Your trial has expired. Please select a plan to continue using Railway.`
-Đã chuyển nền tảng dự kiến sang Render, nhưng Render cũng yêu cầu billing. Người học yêu cầu tạm bỏ deploy cloud;
-không đánh dấu CP6 hoàn thành khi chưa có URL public qua đủ 4 kiểm tra.
+Đã deploy chính agent Part 6 lên Railway bằng tài khoản mới, kèm Redis trên mạng nội bộ.
+Public URL: [https://day14-agent-production-a76b55eb.up.railway.app](https://day14-agent-production-a76b55eb.up.railway.app).
+Bốn kiểm tra public thực tế: GET /health 200, GET /ready 200, POST /ask thiếu key 401, có key 200.
+Xem [public-api.json](evidence/part6/public-api.json), [trạng thái Railway](evidence/part6/railway-deployment.json) và [DEPLOYMENT.md](DEPLOYMENT.md). Ba ảnh deploy đã bổ sung; dashboard.png là bản xuất trạng thái Railway CLI.
 
 | Railway TOML | Render YAML |
 |---|---|
@@ -291,7 +291,7 @@ Log đầy đủ: [readiness.txt](evidence/part6/readiness.txt). Image 238 MiB t
 Kiểm tra bổ sung Compose: input rỗng, toàn khoảng trắng, sai kiểu đều 422; health/ready 200, thiếu key 401.
 20 request đồng thời qua 2 worker cho đúng 10 lần 200 và 10 lần 429:
 [api-validation.json](evidence/part6/api-validation.json).
-PASS 12/12 kiểm tra cấu hình public-ready; chưa tự chứng minh đã có URL cloud (theo DEPLOYMENT.md).
+Ngoài PASS 12/12 local, URL Railway đã qua đủ bốn kiểm tra public; xem DEPLOYMENT.md và evidence/part6/public-api.json.
 
 ## Part 7 — Benchmark & Observability (CP7–CP8)
 
@@ -306,6 +306,7 @@ Không sửa golden_dataset.jsonl hoặc check_production_ready.py.
 | Đọc lab, giải thích các bước | Đối chiếu tài liệu K5 và lập thứ tự checkpoint | Đọc README/RULES/CHECKPOINTS/SUBMISSION/RUBRIC và code mẫu |
 | Làm Part 1, sau đó toàn bộ checkpoint/part | AI viết code Part 6, metric/KB/CI, sửa 2 lỗi mẫu, thu thập và tổng hợp báo cáo | AI trực tiếp chạy HTTP, Docker build/Compose, script chấm gốc, eval/load/Locust, promtool và browser screenshot; đường dẫn bằng chứng đi kèm từng phần |
 | Chọn Railway rồi chuyển Render | Chuẩn bị cấu hình deploy và thực hiện login CLI | Railway bị chặn bởi trial hết hạn; trạng thái thật của cloud ghi trong DEPLOYMENT.md |
+| Hoàn tất deploy Railway bằng tài khoản mới | AI tạo project/Redis/agent, đặt env, upload code và tạo public domain | Kiểm tra live HTTP 200/200/401/200, Redis nội bộ và hai service SUCCESS; lưu JSON và ảnh từ CLI/public API, không lưu secret vào Git |
 
 Các thao tác tự động trên do AI thực hiện trong workspace. Chưa có xác nhận người học đã tự đọc hiểu từng đoạn code;
 người học cần đối chiếu code và bằng chứng trước khi nộp/giải thích với Lab Coach. Không khai các thao tác AI là tự làm tay.
